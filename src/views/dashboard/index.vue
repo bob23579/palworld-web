@@ -105,9 +105,6 @@ const updateButtonOnClick = () => {
 </script>
 
 <template>
-  <!--  显示cpu 内存等状态 -->
-  <!--  显示pal游戏状态 -->
-  <!--  开启 重启 关闭 更新 按钮 -->
   <div>
     <el-button type="primary" @click="checkButtonOnClick">检测状态</el-button>
     <el-button type="primary" @click="startButtonOnClick">开启</el-button>
