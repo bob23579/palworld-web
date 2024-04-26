@@ -46,7 +46,7 @@ const form = reactive({
   pal_egg_default_hatching_time: 72,
   work_speed_rate: 1,
   b_is_multiplay: false,
-  b_is_pv_p: false,
+  b_is_pvp: false,
   b_can_pickup_other_guild_death_penalty_drop: false,
   b_enable_non_login_penalty: true,
   b_enable_fast_travel: true,
@@ -80,12 +80,6 @@ const onSubmit = () => {
     type: "success"
   })
 }
-const onSave = () => {
-  ElMessage({
-    message: "点击了保存按钮",
-    type: "success"
-  })
-}
 
 const onReset = () => {
   // 重置时，重新向后台请求配置，覆盖当前网页配置
@@ -112,39 +106,212 @@ const getGameConfig = () => {
 
 <template>
   <div>
-    <!--    配置文件 对照-->
-    <!--    从后台获取当前配置，修改后返回后台 -->
-    <!--    Difficulty: "None", DayTimeSpeedRate: 1.000000, NightTimeSpeedRate: 1.000000, ExpRate: 1.000000, PalCaptureRate: 1.000000,
-	PalSpawnNumRate: 1.000000, PalDamageRateAttack: 1.000000, PalDamageRateDefense: 1.000000, PlayerDamageRateAttack: 1.000000,
-	PlayerDamageRateDefense: 1.000000, PlayerStomachDecreaceRate: 1.000000, PlayerStaminaDecreaceRate: 1.000000,
-	PlayerAutoHPRegeneRate: 1.000000, PlayerAutoHpRegeneRateInSleep: 1.000000, PalStomachDecreaceRate: 1.000000,
-	PalStaminaDecreaceRate: 1.000000, PalAutoHPRegeneRate: 1.000000, PalAutoHpRegeneRateInSleep: 1.000000,
-	BuildObjectDamageRate: 1.000000, BuildObjectDeteriorationDamageRate: 1.000000, CollectionDropRate: 1.000000,
-	CollectionObjectHpRate: 1.000000, CollectionObjectRespawnSpeedRate: 1.000000, EnemyDropItemRate: 1.000000,
-	DeathPenalty: "All", BEnablePlayerToPlayerDamage: false, BEnableFriendlyFire: false, BEnableInvaderEnemy: true,
-	BActiveUNKO: false, BEnableAimAssistPad: true, BEnableAimAssistKeyboard: false, DropItemMaxNum: 3000,
-	DropItemMaxNum_UNKO: 100, BaseCampMaxNum: 128, BaseCampWorkerMaxNum: 15, DropItemAliveMaxHours: 1.000000,
-	BAutoResetGuildNoOnlinePlayers: false, AutoResetGuildTimeNoOnlinePlayers: 72.000000, GuildPlayerMaxNum: 20,
-	PalEggDefaultHatchingTime: 72.000000, WorkSpeedRate: 1.000000, BIsMultiplay: false, BIsPvP: false,
-	BCanPickupOtherGuildDeathPenaltyDrop: false, BEnableNonLoginPenalty: true, BEnableFastTravel: true,
-	BIsStartLocationSelectByMap: true, BExistPlayerAfterLogout: false, BEnableDefenseOtherGuildPlayer: false,
-	CoopPlayerMaxNum: 4, ServerPlayerMaxNum: 32, ServerName: "Default Palworld Server", ServerDescription: "",
-	AdminPassword: "", ServerPassword: "", PublicPort: 8211, PublicIP: "", RCONEnabled: false, RCONPort: 25575, Region: "",
-	BUseAuth: true, BanListURL: "https://api.palworldgame.com/api/banlist.txt", RESTAPIEnabled: false, RESTAPIPort: 8212,
-	BShowPlayerList: false, AllowConnectPlatform: "Steam", BIsUseBackupSaveData: true, LogFormatType: "Text",-->
     <el-form label-position="right" :model="form" label-width="auto" style="max-width: 600px">
       <el-form-item label="服务器名称">
         <el-input v-model="form.server_name" />
       </el-form-item>
+      <el-form-item label="服务器描述">
+        <el-input v-model="form.server_description" />
+      </el-form-item>
+      <el-form-item label="管理员密码">
+        <el-input v-model="form.admin_password" />
+      </el-form-item>
+      <el-form-item label="服务器密码">
+        <el-input v-model="form.server_password" />
+      </el-form-item>
+      <el-form-item label="公共端口">
+        <el-input v-model="form.public_port" />
+      </el-form-item>
+      <el-form-item label="公共IP">
+        <el-input v-model="form.public_ip" />
+      </el-form-item>
+      <el-form-item label="RCON">
+        <el-switch v-model="form.rcon_enabled" />
+      </el-form-item>
+      <el-form-item label="RCON端口">
+        <el-input v-model="form.rcon_port" />
+      </el-form-item>
+      <el-form-item label="地区">
+        <el-input v-model="form.region" />
+      </el-form-item>
+      <el-form-item label="身份验证">
+        <el-switch v-model="form.b_use_auth" />
+      </el-form-item>
+      <el-form-item label="黑名单">
+        <el-input v-model="form.ban_list_url" />
+      </el-form-item>
+      <el-form-item label="RESTAPI">
+        <el-switch v-model="form.restapi_enabled" />
+      </el-form-item>
+      <el-form-item label="RESTAPI端口">
+        <el-input v-model="form.restapi_port" />
+      </el-form-item>
+      <el-form-item label="显示玩家列表">
+        <el-switch v-model="form.b_show_player_list" />
+      </el-form-item>
+      <el-form-item label="允许连接平台">
+        <el-input v-model="form.allow_connect_platform" />
+      </el-form-item>
+      <el-form-item label="备份数据">
+        <el-switch v-model="form.b_is_use_backup_save_data" />
+      </el-form-item>
+      <el-form-item label="日志格式类型">
+        <el-input v-model="form.log_format_type" />
+      </el-form-item>
+
+      <el-form-item label="合作玩家最大数量">
+        <el-slider v-model="form.coop_player_max_num" :max="6" show-input />
+      </el-form-item>
+      <el-form-item label="f服务器玩家最大数量">
+        <el-slider v-model="form.server_player_max_num" :max="128" show-input />
+      </el-form-item>
+      <el-form-item label="白天流逝速度">
+        <el-slider v-model="form.day_time_speed_rate" :step="0.1" :max="5" show-input />
+      </el-form-item>
+      <el-form-item label="夜晚流逝速度">
+        <el-slider v-model="form.night_time_speed_rate" :step="0.1" :max="5" show-input />
+      </el-form-item>
       <el-form-item label="经验倍率">
-        <el-slider v-model="form.exp_rate" :step="0.05" :max="5" show-input />
+        <el-slider v-model="form.exp_rate" :step="0.1" :max="20" show-input />
+      </el-form-item>
+      <el-form-item label="帕鲁捕获率">
+        <el-slider v-model="form.pal_capture_rate" :step="0.5" :max="2" show-input />
+      </el-form-item>
+      <el-form-item label="帕鲁出现数量倍率">
+        <el-slider v-model="form.pal_spawn_num_rate" :step="0.5" :max="3" show-input />
+      </el-form-item>
+      <el-form-item label="帕鲁攻击伤害倍率">
+        <el-slider v-model="form.pal_damage_rate_attack" :step="0.1" :max="5" show-input />
+      </el-form-item>
+      <el-form-item label="帕鲁承受伤害倍率">
+        <el-slider v-model="form.pal_damage_rate_defense" :step="0.1" :max="5" show-input />
+      </el-form-item>
+      <el-form-item label="玩家攻击伤害倍率">
+        <el-slider v-model="form.player_damage_rate_attack" :step="0.1" :max="5" show-input />
+      </el-form-item>
+      <el-form-item label="玩家承受伤害倍率">
+        <el-slider v-model="form.player_damage_rate_defense" :step="0.1" :max="5" show-input />
+      </el-form-item>
+      <el-form-item label="玩家饱食度降低倍率">
+        <el-slider v-model="form.player_stomach_decreace_rate" :step="0.1" :max="5" show-input />
+      </el-form-item>
+      <el-form-item label="玩家耐力降低倍率">
+        <el-slider v-model="form.player_stamina_decreace_rate" :step="0.1" :max="5" show-input />
+      </el-form-item>
+      <el-form-item label="玩家生命值自然回复倍率">
+        <el-slider v-model="form.player_auto_hp_regene_rate" :step="0.1" :max="5" show-input />
+      </el-form-item>
+      <el-form-item label="玩家睡眠时生命值自然回复倍率">
+        <el-slider v-model="form.player_auto_hp_regene_rate_in_sleep" :step="0.1" :max="5" show-input />
+      </el-form-item>
+      <el-form-item label="帕鲁饱食度降低倍率">
+        <el-slider v-model="form.pal_stomach_decreace_rate" :step="0.1" :max="5" show-input />
+      </el-form-item>
+      <el-form-item label="帕鲁耐力降低倍率">
+        <el-slider v-model="form.pal_stamina_decreace_rate" :step="0.1" :max="5" show-input />
+      </el-form-item>
+      <el-form-item label="帕鲁生命值自然回复倍率">
+        <el-slider v-model="form.pal_auto_hp_regene_rate" :step="0.1" :max="5" show-input />
+      </el-form-item>
+      <el-form-item label="帕鲁睡眠时生命值自然回复倍率">
+        <el-slider v-model="form.pal_auto_hp_regene_rate_in_sleep" :step="0.1" :max="5" show-input />
+      </el-form-item>
+      <el-form-item label="对建筑物伤害倍率">
+        <el-slider v-model="form.build_object_damage_rate" :step="0.5" :max="3" show-input />
+      </el-form-item>
+      <el-form-item label="建筑物劣化速度倍率">
+        <el-slider v-model="form.build_object_deterioration_damage_rate" :step="0" :max="10" show-input />
+      </el-form-item>
+      <el-form-item label="道具采集量倍率">
+        <el-slider v-model="form.collection_drop_rate" :step="0.5" :max="3" show-input />
+      </el-form-item>
+      <el-form-item label="可采集物品生命值倍率">
+        <el-slider v-model="form.collection_object_hp_rate" :step="0.5" :max="3" show-input />
+      </el-form-item>
+      <el-form-item label="可采集物品刷新间隔">
+        <el-slider v-model="form.collection_object_respawn_speed_rate" :step="0.5" :max="3" show-input />
+      </el-form-item>
+      <el-form-item label="道具掉落倍率">
+        <el-slider v-model="form.enemy_drop_item_rate" :step="0.5" :max="3" show-input />
+      </el-form-item>
+      <el-form-item label="世界内掉落物上限">
+        <el-slider v-model="form.drop_item_max_num" :step="0" :max="5000" show-input />
+      </el-form-item>
+      <el-form-item label="基地最大数量">
+        <el-slider v-model="form.base_camp_max_num" :step="0" :max="5000" show-input />
+      </el-form-item>
+      <el-form-item label="可分派至据点工作的帕鲁上限">
+        <el-slider v-model="form.base_camp_worker_max_num" :step="1" :max="20" show-input />
+      </el-form-item>
+      <el-form-item label="掉落物品存在时间上限(小时)">
+        <el-slider v-model="form.drop_item_alive_max_hours" :step="1" :max="20" show-input />
+      </el-form-item>
+      <el-form-item label="工会人数上限">
+        <el-slider v-model="form.guild_player_max_num" :step="1" :max="40" show-input />
+      </el-form-item>
+      <el-form-item label="帕鲁蛋孵化时间(小时)">
+        <el-slider v-model="form.guild_player_max_num" :step="0.05" :max="240" show-input />
+      </el-form-item>
+      <el-form-item label="工作速度">
+        <el-slider v-model="form.work_speed_rate" :step="0.05" :max="200" show-input />
+      </el-form-item>
+
+      <el-form-item label="死亡惩罚">
+        <el-switch v-model="form.death_penalty" />
+      </el-form-item>
+      <el-form-item label="世界内掉落物上限(UNKO)">
+        <el-slider v-model="form.drop_item_max_num_unko" :max="5000" show-input />
+      </el-form-item>
+      <el-form-item label="自动重置工会没有在线的玩家时间">
+        <el-slider v-model="form.auto_reset_guild_time_no_online_players" :max="100" show-input />
       </el-form-item>
       <el-form-item label="玩家间伤害">
-        <el-switch v-model="form.player_damage_rate_attack" />
+        <el-switch v-model="form.b_enable_player_to_player_damage" />
+      </el-form-item>
+      <el-form-item label="友军活力">
+        <el-switch v-model="form.b_enable_friendly_fire" />
+      </el-form-item>
+      <el-form-item label="是否发生袭击事件">
+        <el-switch v-model="form.b_enable_invader_enemy" />
+      </el-form-item>
+      <el-form-item label="主动UNKO">
+        <el-switch v-model="form.b_active_unko" />
+      </el-form-item>
+      <el-form-item label="辅助瞄准">
+        <el-switch v-model="form.b_enable_aim_assist_pad" />
+      </el-form-item>
+      <el-form-item label="键盘辅助瞄准">
+        <el-switch v-model="form.b_enable_aim_assist_keyboard" />
+      </el-form-item>
+      <el-form-item label="自动重置工会没有在线玩家">
+        <el-switch v-model="form.b_auto_reset_guild_no_online_players" />
+      </el-form-item>
+      <el-form-item label="多重播放">
+        <el-switch v-model="form.b_is_multiplay" />
+      </el-form-item>
+      <el-form-item label="PVP">
+        <el-switch v-model="form.b_is_pvp" />
+      </el-form-item>
+      <el-form-item label="捡其他公会死亡掉落的物品">
+        <el-switch v-model="form.b_can_pickup_other_guild_death_penalty_drop" />
+      </el-form-item>
+      <el-form-item label="非登录惩罚">
+        <el-switch v-model="form.b_enable_non_login_penalty" />
+      </el-form-item>
+      <el-form-item label="实现快速旅行">
+        <el-switch v-model="form.b_enable_fast_travel" />
+      </el-form-item>
+      <el-form-item label="开始时从地图选择位置">
+        <el-switch v-model="form.b_is_start_location_select_by_map" />
+      </el-form-item>
+      <el-form-item label="玩家退出后依旧存在">
+        <el-switch v-model="form.b_exist_player_after_logout" />
+      </el-form-item>
+      <el-form-item label="防御其他公会玩家">
+        <el-switch v-model="form.b_enable_defense_other_guild_player" />
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click="onSave">保存</el-button>
         <el-button type="primary" @click="onSubmit">保存并应用</el-button>
         <el-button @click="onReset">重置</el-button>
         <el-button @click="getGameConfig">获取配置</el-button>

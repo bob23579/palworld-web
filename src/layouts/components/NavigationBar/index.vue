@@ -33,6 +33,11 @@ const logout = () => {
   userStore.logout()
   router.push("/login")
 }
+/** 修改密码 */
+const userInfo = () => {
+  //userStore.logout()
+  router.push("/userInfo")
+}
 </script>
 
 <template>
@@ -65,6 +70,10 @@ const logout = () => {
             </a>
             <el-dropdown-item divided @click="logout">
               <span style="display: block">退出登录</span>
+            </el-dropdown-item>
+            <!--            modify password-->
+            <el-dropdown-item divided @click="userInfo">
+              <span style="display: block">个人信息</span>
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
