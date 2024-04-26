@@ -5,7 +5,7 @@ import { getGameConfigApi } from "@/api/game"
 
 const form = reactive({
   difficulty: "None",
-  day_time_speed_rate: 1.123456,
+  day_time_speed_rate: 1.0,
   night_time_speed_rate: 1,
   exp_rate: 1,
   pal_capture_rate: 1,
@@ -220,7 +220,7 @@ const getGameConfig = () => {
         <el-slider v-model="form.build_object_damage_rate" :step="0.5" :max="3" show-input />
       </el-form-item>
       <el-form-item label="建筑物劣化速度倍率">
-        <el-slider v-model="form.build_object_deterioration_damage_rate" :step="0" :max="10" show-input />
+        <el-slider v-model="form.build_object_deterioration_damage_rate" :step="0.05" :max="10" show-input />
       </el-form-item>
       <el-form-item label="道具采集量倍率">
         <el-slider v-model="form.collection_drop_rate" :step="0.5" :max="3" show-input />
@@ -235,19 +235,19 @@ const getGameConfig = () => {
         <el-slider v-model="form.enemy_drop_item_rate" :step="0.5" :max="3" show-input />
       </el-form-item>
       <el-form-item label="世界内掉落物上限">
-        <el-slider v-model="form.drop_item_max_num" :step="0" :max="5000" show-input />
+        <el-slider v-model="form.drop_item_max_num" :max="5000" show-input />
       </el-form-item>
       <el-form-item label="基地最大数量">
-        <el-slider v-model="form.base_camp_max_num" :step="0" :max="5000" show-input />
+        <el-slider v-model="form.base_camp_max_num" :max="5000" show-input />
       </el-form-item>
       <el-form-item label="可分派至据点工作的帕鲁上限">
-        <el-slider v-model="form.base_camp_worker_max_num" :step="1" :max="20" show-input />
+        <el-slider v-model="form.base_camp_worker_max_num" :max="20" show-input />
       </el-form-item>
       <el-form-item label="掉落物品存在时间上限(小时)">
-        <el-slider v-model="form.drop_item_alive_max_hours" :step="1" :max="20" show-input />
+        <el-slider v-model="form.drop_item_alive_max_hours" :max="20" show-input />
       </el-form-item>
       <el-form-item label="工会人数上限">
-        <el-slider v-model="form.guild_player_max_num" :step="1" :max="40" show-input />
+        <el-slider v-model="form.guild_player_max_num" :max="40" show-input />
       </el-form-item>
       <el-form-item label="帕鲁蛋孵化时间(小时)">
         <el-slider v-model="form.guild_player_max_num" :step="0.05" :max="240" show-input />

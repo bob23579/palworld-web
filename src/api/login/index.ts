@@ -25,3 +25,12 @@ export function getUserInfoApi() {
     method: "get"
   })
 }
+
+/** 获取用户详情 */
+export function modifyPasswordApi(data: Login.PasswordRequestData) {
+  return request<Login.ModifyPasswordResponseData>({
+    url: "users/modifyPassword",
+    method: "post",
+    data
+  })
+}

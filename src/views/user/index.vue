@@ -2,6 +2,7 @@
 import { reactive } from "vue"
 import { ElMessage } from "element-plus"
 import router from "@/router"
+import { modifyPasswordApi } from "@/api/login"
 
 const form = reactive({
   oldPassword: "",
@@ -14,8 +15,15 @@ const onSubmit = () => {
     ElMessage.error("新旧密码不同")
     return
   }
+
   // submit password
-  ElMessage("提交密码")
+  modifyPasswordApi({ oldPassword: form.oldPassword, newPassword: form.newPassword })
+    .then(() => {
+      ElMessage.success("修改密码成功,重新登陆后有效")
+    })
+    .catch(() => {
+      onReset()
+    })
 }
 const onReset = () => {
   form.oldPassword = ""
