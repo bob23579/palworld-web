@@ -8,7 +8,7 @@ import { resetRouter } from "@/router"
 import { loginApi, getUserInfoApi } from "@/api/login"
 import { type LoginRequestData } from "@/api/login/types/login"
 import routeSettings from "@/config/route"
-
+import { ElMessage } from "element-plus"
 export const useUserStore = defineStore("user", () => {
   const token = ref<string>(getToken() || "")
   const roles = ref<string[]>([])
@@ -20,11 +20,12 @@ export const useUserStore = defineStore("user", () => {
   /** 登录 */
   const login = async ({ username, password }: LoginRequestData) => {
     const { data } = await loginApi({ username, password })
-
-    console.log("login returned data")
-    console.log("login returned data", data)
-    setToken(data.token)
-    token.value = data.token
+    if (data.message === "success") {
+      setToken(data.token)
+      token.value = data.token
+    } else {
+      ElMessage.error("login failed : " + data.message)
+    }
   }
   /** 获取用户详情 */
   const getInfo = async () => {

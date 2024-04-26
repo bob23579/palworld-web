@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useRouter } from "vue-router"
 import { useUserStore } from "@/store/modules/user"
-import { type FormInstance, type FormRules } from "element-plus"
+import { ElMessage, type FormInstance, type FormRules } from "element-plus"
 import { User, Lock } from "@element-plus/icons-vue"
 import { type LoginRequestData } from "@/api/login/types/login"
 import ThemeSwitch from "@/components/ThemeSwitch/index.vue"
@@ -39,6 +39,7 @@ const handleLogin = () => {
           router.push({ path: "/" })
         })
         .catch(() => {
+          ElMessage.error("密码错误")
           loginFormData.password = ""
         })
         .finally(() => {

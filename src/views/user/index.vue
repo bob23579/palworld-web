@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { reactive } from "vue"
 import { ElMessage } from "element-plus"
+import router from "@/router"
 
 const form = reactive({
   oldPassword: "",
@@ -20,6 +21,9 @@ const onReset = () => {
   form.oldPassword = ""
   form.newPassword = ""
   form.confirmPassword = ""
+}
+const returnHome = () => {
+  router.push("/")
 }
 </script>
 
@@ -41,6 +45,7 @@ const onReset = () => {
       <el-button @click="onSubmit">提交</el-button>
       <el-button @click="onReset">清空</el-button>
     </el-form>
+    <el-button @click="returnHome">返回主页</el-button>
   </div>
 </template>
 
