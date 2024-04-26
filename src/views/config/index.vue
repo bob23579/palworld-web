@@ -94,6 +94,74 @@ const getGameConfig = () => {
   getGameConfigApi()
     .then((res) => {
       console.log(res)
+      form.difficulty = res.data.difficulty
+      form.day_time_speed_rate = res.data.day_time_speed_rate
+      form.night_time_speed_rate = res.data.night_time_speed_rate
+      form.exp_rate = res.data.exp_rate
+      form.pal_capture_rate = res.data.pal_capture_rate
+      form.pal_spawn_num_rate = res.data.pal_spawn_num_rate
+      form.pal_damage_rate_attack = res.data.pal_damage_rate_attack
+      form.pal_damage_rate_defense = res.data.pal_damage_rate_defense
+      form.player_damage_rate_attack = res.data.player_damage_rate_attack
+      form.player_damage_rate_defense = res.data.player_damage_rate_defense
+      form.player_stomach_decreace_rate = res.data.player_stomach_decreace_rate
+      form.player_stamina_decreace_rate = res.data.player_stamina_decreace_rate
+      form.player_auto_hp_regene_rate = res.data.player_auto_hp_regene_rate
+      form.player_auto_hp_regene_rate_in_sleep = res.data.player_auto_hp_regene_rate_in_sleep
+      form.pal_stomach_decreace_rate = res.data.pal_stomach_decreace_rate
+      form.pal_stamina_decreace_rate = res.data.pal_stamina_decreace_rate
+      form.pal_auto_hp_regene_rate = res.data.pal_auto_hp_regene_rate
+      form.pal_auto_hp_regene_rate_in_sleep = res.data.pal_auto_hp_regene_rate_in_sleep
+      form.build_object_damage_rate = res.data.build_object_damage_rate
+      form.build_object_deterioration_damage_rate = res.data.build_object_deterioration_damage_rate
+      form.collection_drop_rate = res.data.collection_drop_rate
+      form.collection_object_hp_rate = res.data.collection_object_hp_rate
+      form.collection_object_respawn_speed_rate = res.data.collection_object_respawn_speed_rate
+      form.enemy_drop_item_rate = res.data.enemy_drop_item_rate
+      form.death_penalty = res.data.death_penalty
+      form.b_enable_player_to_player_damage = res.data.b_enable_player_to_player_damage
+      form.b_enable_friendly_fire = res.data.b_enable_friendly_fire
+      form.b_enable_invader_enemy = res.data.b_enable_invader_enemy
+      form.b_active_unko = res.data.b_active_unko
+      form.b_enable_aim_assist_pad = res.data.b_enable_aim_assist_pad
+      form.b_enable_aim_assist_keyboard = res.data.b_enable_aim_assist_keyboard
+      form.drop_item_max_num = res.data.drop_item_max_num
+      form.drop_item_max_num_unko = res.data.drop_item_max_num_unko
+      form.base_camp_max_num = res.data.base_camp_max_num
+      form.base_camp_worker_max_num = res.data.base_camp_worker_max_num
+      form.drop_item_alive_max_hours = res.data.drop_item_alive_max_hours
+      form.b_auto_reset_guild_no_online_players = res.data.b_auto_reset_guild_no_online_players
+      form.auto_reset_guild_time_no_online_players = res.data.auto_reset_guild_time_no_online_players
+      form.guild_player_max_num = res.data.guild_player_max_num
+      form.pal_egg_default_hatching_time = res.data.pal_egg_default_hatching_time
+      form.work_speed_rate = res.data.work_speed_rate
+      form.b_is_multiplay = res.data.b_is_multiplay
+      form.b_is_pvp = res.data.b_is_pvp
+      form.b_can_pickup_other_guild_death_penalty_drop = res.data.b_can_pickup_other_guild_death_penalty_drop
+      form.b_enable_non_login_penalty = res.data.b_enable_non_login_penalty
+      form.b_enable_fast_travel = res.data.b_enable_fast_travel
+      form.b_is_start_location_select_by_map = res.data.b_is_start_location_select_by_map
+      form.b_exist_player_after_logout = res.data.b_exist_player_after_logout
+      form.b_enable_defense_other_guild_player = res.data.b_enable_defense_other_guild_player
+      form.coop_player_max_num = res.data.coop_player_max_num
+      form.server_player_max_num = res.data.server_player_max_num
+      form.server_name = res.data.server_name
+      form.server_description = res.data.server_description
+      form.admin_password = res.data.admin_password
+      form.server_password = res.data.server_password
+      form.public_port = res.data.public_port
+      form.public_ip = res.data.public_ip
+      form.rcon_enabled = res.data.rcon_enabled
+      form.rcon_port = res.data.rcon_port
+      form.region = res.data.region
+      form.b_use_auth = res.data.b_use_auth
+      form.ban_list_url = res.data.ban_list_url
+      form.restapi_enabled = res.data.restapi_enabled
+      form.restapi_port = res.data.restapi_port
+      form.b_show_player_list = res.data.b_show_player_list
+      form.allow_connect_platform = res.data.allow_connect_platform
+      form.b_is_use_backup_save_data = res.data.b_is_use_backup_save_data
+      form.log_format_type = res.data.log_format_type
     })
     .catch((err) => {
       console.log(err)
@@ -124,6 +192,9 @@ const getGameConfig = () => {
       </el-form-item>
       <el-form-item label="公共IP">
         <el-input v-model="form.public_ip" />
+      </el-form-item>
+      <el-form-item label="服务器难度">
+        <el-input v-model="form.difficulty" />
       </el-form-item>
       <el-form-item label="RCON">
         <el-switch v-model="form.rcon_enabled" />
