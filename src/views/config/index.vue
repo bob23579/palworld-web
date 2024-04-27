@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive } from "vue"
 import { ElMessage } from "element-plus"
-import { getGameConfigApi } from "@/api/game"
+import { getGameConfigApi, setGameConfigApi } from "@/api/game"
 
 const form = reactive({
   difficulty: "None",
@@ -75,19 +75,22 @@ const form = reactive({
 })
 
 const onSubmit = () => {
-  ElMessage({
-    message: "点击了保存并应用按钮",
-    type: "success"
-  })
+  setGameConfigApi(form)
+    .then(() => {
+      ElMessage("hello")
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 }
 
-const onReset = () => {
-  // 重置时，重新向后台请求配置，覆盖当前网页配置
-  ElMessage({
-    message: "点击了重置按钮",
-    type: "success"
-  })
-}
+// const onReset = () => {
+//   // 重置时，重新向后台请求配置，覆盖当前网页配置
+//   ElMessage({
+//     message: "点击了重置按钮",
+//     type: "success"
+//   })
+// }
 
 const getGameConfig = () => {
   // 获取后台配置
@@ -328,7 +331,7 @@ const getGameConfig = () => {
       </el-form-item>
 
       <el-form-item label="死亡惩罚">
-        <el-switch v-model="form.death_penalty" />
+        <el-input v-model="form.death_penalty" />
       </el-form-item>
       <el-form-item label="世界内掉落物上限(UNKO)">
         <el-slider v-model="form.drop_item_max_num_unko" :max="5000" show-input />
@@ -384,7 +387,7 @@ const getGameConfig = () => {
 
       <el-form-item>
         <el-button type="primary" @click="onSubmit">保存并应用</el-button>
-        <el-button @click="onReset">重置</el-button>
+        <!--        <el-button @click="onReset">重置</el-button>-->
         <el-button @click="getGameConfig">获取配置</el-button>
       </el-form-item>
     </el-form>

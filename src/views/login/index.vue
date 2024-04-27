@@ -39,7 +39,6 @@ const handleLogin = () => {
           router.push({ path: "/" })
         })
         .catch(() => {
-          ElMessage.error("密码错误")
           loginFormData.password = ""
         })
         .finally(() => {
