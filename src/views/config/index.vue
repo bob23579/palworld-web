@@ -234,9 +234,9 @@ const getGameConfig = () => {
       </el-form-item>
 
       <el-form-item label="合作玩家最大数量">
-        <el-slider v-model="form.coop_player_max_num" :max="6" show-input />
+        <el-slider v-model="form.coop_player_max_num" :max="16" show-input />
       </el-form-item>
-      <el-form-item label="f服务器玩家最大数量">
+      <el-form-item label="服务器玩家最大数量">
         <el-slider v-model="form.server_player_max_num" :max="128" show-input />
       </el-form-item>
       <el-form-item label="白天流逝速度">
@@ -246,13 +246,13 @@ const getGameConfig = () => {
         <el-slider v-model="form.night_time_speed_rate" :step="0.1" :max="5" show-input />
       </el-form-item>
       <el-form-item label="经验倍率">
-        <el-slider v-model="form.exp_rate" :step="0.1" :max="20" show-input />
+        <el-slider v-model="form.exp_rate" :step="0.1" :max="10" show-input />
       </el-form-item>
       <el-form-item label="帕鲁捕获率">
-        <el-slider v-model="form.pal_capture_rate" :step="0.5" :max="2" show-input />
+        <el-slider v-model="form.pal_capture_rate" :step="0.5" :max="10" show-input />
       </el-form-item>
       <el-form-item label="帕鲁出现数量倍率">
-        <el-slider v-model="form.pal_spawn_num_rate" :step="0.5" :max="3" show-input />
+        <el-slider v-model="form.pal_spawn_num_rate" :step="0.5" :max="10" show-input />
       </el-form-item>
       <el-form-item label="帕鲁攻击伤害倍率">
         <el-slider v-model="form.pal_damage_rate_attack" :step="0.1" :max="5" show-input />
@@ -291,22 +291,22 @@ const getGameConfig = () => {
         <el-slider v-model="form.pal_auto_hp_regene_rate_in_sleep" :step="0.1" :max="5" show-input />
       </el-form-item>
       <el-form-item label="对建筑物伤害倍率">
-        <el-slider v-model="form.build_object_damage_rate" :step="0.5" :max="3" show-input />
+        <el-slider v-model="form.build_object_damage_rate" :step="0.5" :max="10" show-input />
       </el-form-item>
       <el-form-item label="建筑物劣化速度倍率">
         <el-slider v-model="form.build_object_deterioration_damage_rate" :step="0.05" :max="10" show-input />
       </el-form-item>
       <el-form-item label="道具采集量倍率">
-        <el-slider v-model="form.collection_drop_rate" :step="0.5" :max="3" show-input />
+        <el-slider v-model="form.collection_drop_rate" :step="0.5" :max="10" show-input />
       </el-form-item>
       <el-form-item label="可采集物品生命值倍率">
-        <el-slider v-model="form.collection_object_hp_rate" :step="0.5" :max="3" show-input />
+        <el-slider v-model="form.collection_object_hp_rate" :step="0.5" :max="10" show-input />
       </el-form-item>
       <el-form-item label="可采集物品刷新间隔">
-        <el-slider v-model="form.collection_object_respawn_speed_rate" :step="0.5" :max="3" show-input />
+        <el-slider v-model="form.collection_object_respawn_speed_rate" :step="0.5" :max="10" show-input />
       </el-form-item>
       <el-form-item label="道具掉落倍率">
-        <el-slider v-model="form.enemy_drop_item_rate" :step="0.5" :max="3" show-input />
+        <el-slider v-model="form.enemy_drop_item_rate" :step="0.5" :max="10" show-input />
       </el-form-item>
       <el-form-item label="世界内掉落物上限">
         <el-slider v-model="form.drop_item_max_num" :max="5000" show-input />
